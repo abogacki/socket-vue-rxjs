@@ -1,10 +1,12 @@
 <template>
   <footer>
     <div class="content has-text-centered">
-      <p>
-        <strong>Template app</strong> by
-        Andrzej Bogacki
-      </p>
+      <div class="level">
+        <div class="level-item">
+          Template app by
+          Andrzej Bogacki
+        </div>
+      </div>
     </div>
   </footer>
 </template>
@@ -14,4 +16,7 @@ export default {}
 </script>
 
 <style>
+footer {
+  margin-bottom: 2rem;
+}
 </style>

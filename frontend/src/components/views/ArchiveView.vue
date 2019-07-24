@@ -18,7 +18,7 @@ export default {
     anime({
       targets: '.header',
       opacity: [0, 1],
-      translateX: [-200, 0],
+      translateX: [-100, 0],
       delay: 750,
     })
   },

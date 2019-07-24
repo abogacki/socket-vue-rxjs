@@ -2,9 +2,11 @@
   <nav class="navbar" role="navigation is-transparent" aria-label="main navigation">
     <div class="container">
       <div class="navbar-brand">
-        <a class="navbar-item" href="https://bulma.io">
-          <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
-        </a>
+        <div class="navbar-item">
+          <fa-icon icon="compass" style="margin-bottom:0.25em" />&nbsp;
+          <span class="heading">Weather</span>
+          <span class="heading has-text-weight-light">app</span>
+        </div>
 
         <a
           role="button"
@@ -21,32 +23,21 @@
 
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
-          <a class="navbar-item">Home</a>
+          <a class="navbar-item heading">Home</a>
 
           <div class="navbar-item has-dropdown is-hoverable has-text-success">
-            <a class="navbar-item">More</a>
+            <a class="navbar-item heading">More</a>
             <div class="navbar-dropdown is-boxed">
               <router-link
                 v-for="(route, index) in routes"
                 :to="route.path"
                 tag="a"
-                class="navbar-item has-text-primary"
+                class="navbar-item heading has-text-primary"
                 :href="route.path"
                 :key="index"
                 active-class="is-active"
                 exact
               >{{ route.name }}</router-link>
-            </div>
-          </div>
-        </div>
-
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons">
-              <a class="button is-primary">
-                <strong>Sign up</strong>
-              </a>
-              <a class="button is-light">Log in</a>
             </div>
           </div>
         </div>

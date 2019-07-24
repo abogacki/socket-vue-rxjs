@@ -32,7 +32,7 @@
                 v-for="(route, index) in routes"
                 :to="route.path"
                 tag="a"
-                class="navbar-item heading has-text-primary"
+                class="navbar-item heading"
                 :href="route.path"
                 :key="index"
                 active-class="is-active"
@@ -56,4 +56,7 @@ export default {
 </script>
 
 <style>
+.navbar-dropdown > .navbar-item:not(.is-active) {
+  color: gray;
+}
 </style>

@@ -28,11 +28,14 @@ io.on('connect', socket => {
   })
 })
 
-const darkSkyUrl = 'https://api.darksky.net/forecast//43.7695,11.2558'
+const darkSkyUrl =
+  'https://api.darksky.net/forecast/004e080b7d25e328f7d2f97c96c7d7ea/43.7695,11.2558?units=si'
 
-const getDarkSkyUrl = (latitude, longitude) => {
+const getDarkSkyUrl = (latitude, longitude, units) => {
   const baseUrl = 'https://api.darksky.net/forecast'
-  const url = `${baseUrl}/${process.env.DARK_SKY_KEY}/${latitude},${longitude}`
+  const url = `${baseUrl}/${
+    process.env.DARK_SKY_KEY
+  }/${latitude},${longitude}?units=${units}`
   return url
 }
 

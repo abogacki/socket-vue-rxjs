@@ -1,14 +1,8 @@
 import socketIOClient from 'socket.io-client'
 
-export default class WeatherService {
-  constructor(endpoint) {
-    this.endpoint = endpoint
-    this.createSocket()
-  }
-
-  createSocket() {
-    this.socket = socketIOClient(this.endpoint)
-  }
+class WeatherService {
+  endpoint = 'http://192.168.208.25:4001'
+  socket = socketIOClient(this.endpoint)
 
   addConnection(event, fn) {
     this.socket.on(event, fn)
@@ -18,3 +12,8 @@ export default class WeatherService {
     this.socket.off(event)
   }
 }
+
+// shouldn't be singleton
+const weatherService = new WeatherService()
+
+export default weatherService

@@ -1,6 +1,6 @@
 <template>
   <ViewBase>
-    <div v-if="weather">
+    <div v-if="currently && daily && latitude && longitude">
       <div class="tile is-ancestor">
         <div class="tile is-vertical is-8">
           <div class="tile">
@@ -12,7 +12,7 @@
                     <fa-icon size="4x" icon="temperature-high" />
                   </figure>
                   <strong class="is-size-3">
-                    {{weather.currently.temperature}}
+                    {{currently.temperature}}
                     <small>°F</small>
                   </strong>
                 </div>
@@ -26,7 +26,7 @@
                   <fa-icon size="6x" icon="sun" />
                 </figure>
                 <br />
-                <p class="has-text-centered has-text-weight-bold">{{weather.currently.summary}}</p>
+                <p class="has-text-centered has-text-weight-bold">{{currently.summary}}</p>
               </article>
             </div>
           </div>
@@ -36,11 +36,7 @@
               <p class="heading">Forecast for upcoming days</p>
               <br />
               <div class="level">
-                <div
-                  class="level-item has-text-centered"
-                  v-for="day in weather.daily.data"
-                  :key="day.time"
-                >
+                <div class="level-item has-text-centered" v-for="day in daily.data" :key="day.time">
                   <div>
                     <p class="heading">{{new Date(day.time * 1000).toLocaleDateString()}}</p>
                     <br />
@@ -60,25 +56,25 @@
           <article class="tile is-child notification is-success">
             <div class="content">
               <p class="heading">current weather details for</p>
-              <p class="subtitle">{{weather.latitude}}, {{weather.longitude}}</p>
+              <p class="subtitle">{{latitude}}, {{longitude}}</p>
               <div class="content">
                 <p>
                   <span class="heading">pressure:</span>
-                  {{weather.currently.pressure}} hPa
+                  {{currently.pressure}} hPa
                 </p>
                 <p>
                   <span class="heading">cloud cover:</span>
-                  {{weather.currently.cloudCover * 100}} %
+                  {{currently.cloudCover * 100}} %
                 </p>
 
                 <p>
                   <span class="heading">humidity:</span>
-                  {{weather.currently.humidity * 100}} %
+                  {{currently.humidity * 100}} %
                 </p>
 
                 <p>
                   <span class="heading">wind speed:</span>
-                  {{weather.currently.windSpeed}}
+                  {{currently.windSpeed}}
                 </p>
               </div>
             </div>
@@ -94,25 +90,18 @@
 import WeatherService from '@/_services/weather.service.js'
 import Weather from '@/classes/weather'
 import ViewBase from './_BaseView'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'Weather',
-  data() {
-    return { weather: false }
+  computed: {
+    ...mapGetters(['currently', 'daily', 'latitude', 'longitude']),
   },
   created() {
     const endpoint = 'http://192.168.208.25:4001'
-    this.weatherService = new WeatherService(endpoint)
-    this.weatherService.addConnection('FromAPI', this.onDataReceive)
+    this.openConnection()
   },
-  methods: {
-    onDataReceive(data) {
-      this.weather = data
-    },
-  },
-  beforeDestroy() {
-    this.weatherService.closeConnection()
-  },
+  methods: mapActions(['openConnection']),
   components: {
     ViewBase,
   },

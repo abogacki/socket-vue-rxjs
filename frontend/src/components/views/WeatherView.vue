@@ -91,6 +91,7 @@ import WeatherService from '@/_services/weather.service.js'
 import Weather from '@/classes/weather'
 import ViewBase from './_BaseView'
 import { mapActions, mapGetters } from 'vuex'
+import { OPEN_CONNECTION, CLOSE_CONNECTION } from '@/store/modules/weather'
 
 export default {
   name: 'Weather',
@@ -99,9 +100,9 @@ export default {
   },
   created() {
     const endpoint = 'http://192.168.208.25:4001'
-    this.openConnection()
+    this[OPEN_CONNECTION]()
   },
-  methods: mapActions(['openConnection']),
+  methods: mapActions([OPEN_CONNECTION]),
   components: {
     ViewBase,
   },

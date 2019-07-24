@@ -1,5 +1,11 @@
 import weatherService from '@/_services/weather.service'
-import socketIOClient from 'socket.io-client'
+
+// action types
+export const OPEN_CONNECTION = 'weatherOpenConnection'
+export const CLOSE_CONNECTION = 'weatherCloseConnection'
+
+// mutation types
+export const UPDATE_WEATHER = 'weatherUpdate'
 
 const state = {
   alerts: [],
@@ -12,27 +18,27 @@ const state = {
   longitude: 0,
   connections: [],
 }
+
 const getters = {
   currently: state => state.currently,
   daily: state => state.daily,
   latitude: state => state.latitude,
   longitude: state => state.longitude,
 }
+
 const actions = {
-  openConnection({ dispatch }, params) {
+  [OPEN_CONNECTION]({ commit }, params) {
     weatherService.addConnection('FromAPI', data =>
-      dispatch('onDataReceive', data)
+      commit(UPDATE_WEATHER, data)
     )
   },
-  closeConnection({ commit, dispatch }, params) {
+  [CLOSE_CONNECTION]({ commit, dispatch }, params) {
     weatherService.closeConnection('FromAPI')
   },
-  onDataReceive({ commit }, data) {
-    commit('updateWeather', data)
-  },
 }
+
 const mutations = {
-  updateWeather: (state, data) => {
+  [UPDATE_WEATHER]: function(state, data) {
     Object.keys(data).forEach(key => (state[key] = data[key]))
   },
 }

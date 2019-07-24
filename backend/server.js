@@ -50,8 +50,7 @@ const getApiAndEmit = async socket => {
 
     socket.emit('FromAPI', res.data)
   } catch (error) {
-    console.error(`Error: ${error.code}; ${error.message}`)
-    throw error
+    socket.emit(`Error`, error)
   }
 }
 

@@ -1,6 +1,6 @@
 <template>
   <ViewBase>
-    <div v-if="currently && daily && latitude && longitude">
+    <div v-if="currentByPosition">
       <div class="tile is-ancestor">
         <div class="tile is-vertical is-8">
           <div class="tile">
@@ -12,7 +12,7 @@
                     <fa-icon size="4x" icon="temperature-high" />
                   </figure>
                   <strong class="is-size-3">
-                    {{currently.temperature}}
+                    {{currentByPosition.temperature}}
                     <small>°F</small>
                   </strong>
                 </div>
@@ -26,17 +26,21 @@
                   <fa-icon size="6x" icon="sun" />
                 </figure>
                 <br />
-                <p class="has-text-centered has-text-weight-bold">{{currently.summary}}</p>
+                <p class="has-text-centered has-text-weight-bold">{{currentByPosition.summary}}</p>
               </article>
             </div>
           </div>
 
-          <div class="tile is-parent">
+          <div v-if="dailyByPosition" class="tile is-parent">
             <article class="tile is-child">
               <p class="heading">Forecast for upcoming days</p>
               <br />
               <div class="level">
-                <div class="level-item has-text-centered" v-for="day in daily.data" :key="day.time">
+                <div
+                  class="level-item has-text-centered"
+                  v-for="day in dailyByPosition.data"
+                  :key="day.time"
+                >
                   <div>
                     <p class="heading">{{new Date(day.time * 1000).toLocaleDateString()}}</p>
                     <br />
@@ -60,21 +64,21 @@
               <div class="content">
                 <p>
                   <span class="heading">pressure:</span>
-                  {{currently.pressure}} hPa
+                  {{currentByPosition.pressure}} hPa
                 </p>
                 <p>
                   <span class="heading">cloud cover:</span>
-                  {{currently.cloudCover * 100}} %
+                  {{currentByPosition.cloudCover * 100}} %
                 </p>
 
                 <p>
                   <span class="heading">humidity:</span>
-                  {{currently.humidity * 100}} %
+                  {{currentByPosition.humidity * 100}} %
                 </p>
 
                 <p>
                   <span class="heading">wind speed:</span>
-                  {{currently.windSpeed}}
+                  {{currentByPosition.windSpeed}}
                 </p>
               </div>
             </div>
@@ -82,25 +86,44 @@
         </div>
       </div>
     </div>
-    <div v-else>Loading...</div>
   </ViewBase>
 </template>
 
 <script>
-import WeatherService from '@/_services/weather.service.js'
+import WeatherService from '@/services/weather.service.js'
 import Weather from '@/classes/weather'
 import ViewBase from './_BaseView'
 import { mapActions, mapGetters } from 'vuex'
-import { OPEN_CONNECTION, CLOSE_CONNECTION } from '@/store/modules/weather'
+import {
+  GET_CURRENT_BY_POSITION,
+  GET_DAILY_BY_POSITION,
+  OPEN_CONNECTION,
+  CLOSE_CONNECTION,
+} from '@/store/modules/weather'
 
 export default {
   name: 'Weather',
   computed: {
-    ...mapGetters(['currently', 'daily', 'latitude', 'longitude']),
+    currentByPosition() {
+      const { latitude, longitude } = this
+      return this.$store.getters[GET_CURRENT_BY_POSITION]({
+        latitude,
+        longitude,
+      })
+    },
+    dailyByPosition() {
+      const { latitude, longitude } = this
+      return this.$store.getters[GET_DAILY_BY_POSITION]({ latitude, longitude })
+    },
+  },
+  data() {
+    return {
+      latitude: 43.7695,
+      longitude: 11.2558,
+    }
   },
   created() {
-    const endpoint = 'http://192.168.208.25:4001'
-    this[OPEN_CONNECTION]()
+    this[OPEN_CONNECTION](this.latitude, this.longitude)
   },
   methods: mapActions([OPEN_CONNECTION]),
   components: {

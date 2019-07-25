@@ -41,13 +41,11 @@ const getDarkSkyUrl = (latitude, longitude, units) => {
 
 const getApiAndEmit = async socket => {
   try {
-    // console.log(import);
     // const res = await axios.get(darkSkyUrl)
     const data = await import('./_mocks/weatherResponse.json')
     const res = {
       data,
     }
-
     socket.emit('FromAPI', res.data)
   } catch (error) {
     socket.emit(`Error`, error)

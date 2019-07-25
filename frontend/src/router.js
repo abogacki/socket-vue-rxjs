@@ -1,12 +1,14 @@
 import VueRouter from 'vue-router'
-import Archive from '@/components/views/ArchiveView'
-import Posts from '@/components/views/PostsView'
 import Weather from '@/components/views/WeatherView'
+import LocationList from '@/components/views/LocationListView'
 
 export const routes = [
-  { name: 'Weather', path: '/', component: Weather },
-  { name: 'Archive', path: '/archive', component: Archive },
-  { name: 'Posts', path: '/post', component: Posts },
+  { name: 'Locations', path: '/', component: LocationList },
+  {
+    name: 'Weather',
+    path: '/weather/:location/',
+    component: Weather,
+  },
 ]
 
 export default new VueRouter({ routes, linkActiveClass: 'is-active' })

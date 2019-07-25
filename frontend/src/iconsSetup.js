@@ -4,9 +4,10 @@ import {
   faTemperatureHigh,
   faSun,
   faCompass,
+  faSearch,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faTemperatureHigh, faSun, faCompass)
+library.add(faTemperatureHigh, faSun, faCompass, faSearch)
 
 Vue.component('fa-icon', FontAwesomeIcon)

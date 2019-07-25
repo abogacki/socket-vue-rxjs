@@ -1,19 +1,25 @@
 <template>
-  <nav class="navbar" role="navigation is-transparent" aria-label="main navigation">
+  <nav
+    class="navbar is-fixed-top is-spaced is-shadowed"
+    role="navigation"
+    aria-label="main navigation"
+  >
     <div class="container">
       <div class="navbar-brand">
-        <div class="navbar-item">
+        <a href="#/" class="navbar-item">
           <fa-icon icon="compass" style="margin-bottom:0.25em" />&nbsp;
           <span class="heading">Weather</span>
           <span class="heading has-text-weight-light">app</span>
-        </div>
+        </a>
 
         <a
           role="button"
-          class="navbar-burger burger"
+          class="navbar-burger burger has-text-white"
+          :class="{'is-active':isActive}"
           aria-label="menu"
           aria-expanded="false"
           data-target="navbarBasicExample"
+          @click="toggleActive()"
         >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -21,27 +27,7 @@
         </a>
       </div>
 
-      <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-          <a class="navbar-item heading">Home</a>
-
-          <div class="navbar-item has-dropdown is-hoverable has-text-success">
-            <a class="navbar-item heading">More</a>
-            <div class="navbar-dropdown is-boxed">
-              <router-link
-                v-for="(route, index) in routes"
-                :to="route.path"
-                tag="a"
-                class="navbar-item heading"
-                :href="route.path"
-                :key="index"
-                active-class="is-active"
-                exact
-              >{{ route.name }}</router-link>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div id="navbarBasicExample" class="navbar-menu" :class="{'is-active': isActive}"></div>
     </div>
   </nav>
 </template>
@@ -49,14 +35,24 @@
 <script>
 import { routes } from '@/router'
 export default {
+  data() {
+    return {
+      isActive: false,
+    }
+  },
+  methods: {
+    toggleActive() {
+      this.isActive = !this.isActive
+    },
+  },
   beforeCreate() {
     this.routes = routes
   },
 }
 </script>
 
-<style>
-.navbar-dropdown > .navbar-item:not(.is-active) {
-  color: gray;
+<style scoped>
+.navbar {
+  box-shadow: 0 1px 0 hsla(0, 0%, 100%, 0.2);
 }
 </style>

@@ -11,20 +11,6 @@
           <span class="heading">Weather</span>
           <span class="heading has-text-weight-light">app</span>
         </a>
-
-        <a
-          role="button"
-          class="navbar-burger burger has-text-white"
-          :class="{'is-active':isActive}"
-          aria-label="menu"
-          aria-expanded="false"
-          data-target="navbarBasicExample"
-          @click="toggleActive()"
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
       </div>
 
       <div id="navbarBasicExample" class="navbar-menu" :class="{'is-active': isActive}"></div>

@@ -2,29 +2,29 @@
   <div id="app">
     <div class="hero is-primary is-bold is-fullheight">
       <div class="hero-head">
-        <NavBar />
+        <AppNavBar />
       </div>
       <div class="hero-body">
-        <Content />
+        <AppContent />
       </div>
       <div class="hero-foot">
-        <Footer />
+        <AppFooter />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import NavBar from '@/components/NavBar'
-import Content from '@/components/Content'
-import Footer from '@/components/Footer'
+import AppNavBar from '@/components/AppNavBar'
+import AppContent from '@/components/AppContent'
+import AppFooter from '@/components/AppFooter'
 
 export default {
   name: 'app',
   components: {
-    Content,
-    NavBar,
-    Footer,
+    AppContent,
+    AppNavBar,
+    AppFooter,
   },
 }
 </script>

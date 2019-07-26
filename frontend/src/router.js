@@ -1,12 +1,12 @@
 import VueRouter from 'vue-router'
-import Weather from '@/components/views/WeatherView'
-import LocationList from '@/components/views/LocationListView'
+import Weather from '@/components/Weather'
+import Location from '@/components/Location'
 
 export const routes = [
-  { name: 'Locations', path: '/', component: LocationList },
+  { name: 'Location', path: '/', component: Location },
   {
     name: 'Weather',
-    path: '/weather/:location/',
+    path: '/weather/:location_id',
     component: Weather,
   },
 ]

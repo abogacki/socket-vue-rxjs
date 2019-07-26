@@ -1,18 +1,20 @@
 <template>
   <ViewBase>
-    <div v-if="currentByPosition">
+    <div>{{location}}</div>
+    <div>{{weather}}</div>
+    <div v-if="location">
       <div class="tile is-ancestor">
         <div class="tile is-vertical is-8">
           <div class="tile">
             <div class="tile is-parent is-vertical">
               <article class="tile is-child notification is-primary">
-                <p class="heading">Temperature</p>
+                <p class="heading">Temperature for {{location.name}}</p>
                 <div class="content has-text-centered">
                   <figure class="image">
                     <fa-icon size="4x" icon="temperature-high" />
                   </figure>
                   <strong class="is-size-3">
-                    {{currentByPosition.temperature}}
+                    {{location.currently.temperature}}
                     <small>°F</small>
                   </strong>
                 </div>
@@ -26,7 +28,7 @@
                   <fa-icon size="6x" icon="sun" />
                 </figure>
                 <br />
-                <p class="has-text-centered has-text-weight-bold">{{currentByPosition.summary}}</p>
+                <p class="has-text-centered has-text-weight-bold">{{location.currently.summary}}</p>
               </article>
             </div>
           </div>
@@ -64,21 +66,21 @@
               <div class="content">
                 <p>
                   <span class="heading">pressure:</span>
-                  {{currentByPosition.pressure}} hPa
+                  {{location.currently.pressure}} hPa
                 </p>
                 <p>
                   <span class="heading">cloud cover:</span>
-                  {{currentByPosition.cloudCover * 100}} %
+                  {{location.currently.cloudCover * 100}} %
                 </p>
 
                 <p>
                   <span class="heading">humidity:</span>
-                  {{currentByPosition.humidity * 100}} %
+                  {{location.currently.humidity * 100}} %
                 </p>
 
                 <p>
                   <span class="heading">wind speed:</span>
-                  {{currentByPosition.windSpeed}}
+                  {{location.currently.windSpeed}}
                 </p>
               </div>
             </div>
@@ -90,42 +92,27 @@
 </template>
 
 <script>
-import WeatherService from '@/services/weather.service.js'
-import Weather from '@/classes/weather'
-import ViewBase from './_BaseView'
-import { mapActions, mapGetters } from 'vuex'
-import {
-  GET_CURRENT_BY_POSITION,
-  GET_DAILY_BY_POSITION,
-  OPEN_CONNECTION,
-  CLOSE_CONNECTION,
-} from '@/store/modules/weather'
+import WeatherService from '@/services/connection.service.js'
+import ViewBase from './_Animation'
+import { Weather, Location } from '@/models/'
 
 export default {
   name: 'Weather',
   computed: {
-    currentByPosition() {
-      const { latitude, longitude } = this
-      return this.$store.getters[GET_CURRENT_BY_POSITION]({
-        latitude,
-        longitude,
-      })
+    location_id() {
+      return this.$route.params.location_id
     },
-    dailyByPosition() {
-      const { latitude, longitude } = this
-      return this.$store.getters[GET_DAILY_BY_POSITION]({ latitude, longitude })
+    location() {
+      return Location.query()
+        .with('weather')
+        .get()
+    },
+    weather() {
+      return Weather.query()
+        .where('location_id', this.location_id)
+        .get()
     },
   },
-  data() {
-    return {
-      latitude: 43.7695,
-      longitude: 11.2558,
-    }
-  },
-  created() {
-    this[OPEN_CONNECTION](this.latitude, this.longitude)
-  },
-  methods: mapActions([OPEN_CONNECTION]),
   components: {
     ViewBase,
   },

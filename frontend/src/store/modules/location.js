@@ -1,8 +1,4 @@
 const store = {
-  locations: {
-    byId: {},
-    allIds: [],
-  },
 }
 
 const getters = {

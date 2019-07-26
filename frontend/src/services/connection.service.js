@@ -1,11 +1,11 @@
 import socketIOClient from 'socket.io-client'
 
-class WeatherService {
+class ConnectionService {
   endpoint = 'http://192.168.208.25:4001'
   constructor(latitude, longitude, params) {
     this.url = `${this.endpoint}/${latitude},${longitude}?${params}`
+    this.socket = socketIOClient(this.endpoint)
   }
-  socket = socketIOClient(this.endpoint)
 
   openConnection(event, fn) {
     this.socket.on(event, fn)
@@ -16,4 +16,4 @@ class WeatherService {
   }
 }
 
-export default WeatherService
+export default ConnectionService

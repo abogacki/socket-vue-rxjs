@@ -1,5 +1,4 @@
 import { Model } from '@vuex-orm/core'
-import uuid from 'uuid/v1'
 
 export class Location extends Model {
   static entity = 'locations'

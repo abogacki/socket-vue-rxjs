@@ -14,6 +14,7 @@ class ConnectionService {
 
   closeConnection(event) {
     this.socket.off(event)
+    this.socket.close()
   }
 }
 

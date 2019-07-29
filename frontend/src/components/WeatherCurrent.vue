@@ -21,7 +21,7 @@
       <article class="tile is-child notification is-info">
         <p class="heading">Today is...</p>
         <figure class="image has-text-centered">
-          <fa-icon size="6x" icon="sun" />
+          <fa-icon size="6x" :icon="translatedIcon" />
         </figure>
         <br />
         <div class="content">
@@ -33,11 +33,19 @@
 </template>
 
 <script>
+import { translateIcon } from '@/services/icon.service'
+
 export default {
   props: {
     location: String,
     temperature: Number,
     summary: String,
+    icon: String,
+  },
+  computed: {
+    translatedIcon() {
+      return translateIcon(this.icon)
+    },
   },
   data() {
     return {

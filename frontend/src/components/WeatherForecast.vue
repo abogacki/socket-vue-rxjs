@@ -10,7 +10,7 @@
           <p class="heading">{{new Date(day.time * 1000).toLocaleDateString()}}</p>
           <br />
           <figure class="image">
-            <fa-icon icon="sun" size="3x" />
+            <fa-icon :icon="getIcon(day.icon)" size="3x" />
           </figure>
           <br />
           <p class="has-text-blue">{{ day.temperatureLow }} {{units.temperature}}</p>
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { translateIcon } from '@/services/icon.service'
 export default {
   data() {
     return {
@@ -33,6 +34,11 @@ export default {
   props: {
     data: Array,
     summary: String,
+  },
+  methods: {
+    getIcon(icon) {
+      return translateIcon(icon)
+    },
   },
 }
 </script>

@@ -2,10 +2,10 @@
   <ViewBase>
     <template #header>
       <div class="subtitle heading">
-        <a @click="$router.back()">
+        <router-link tag="a" to="/">
           <fa-icon icon="arrow-left" />&nbsp;
           Location list
-        </a>
+        </router-link>
       </div>
     </template>
 
@@ -13,25 +13,21 @@
       <div class="tile is-ancestor">
         <div class="tile is-vertical is-8">
           <WeatherCurrent
-            :temperature="weather.currently.temperature"
-            :summary="weather.currently.summary"
+            v-bind="weather.currently"
           />
           <div v-if="weather.daily" class="tile is-parent">
-            <WeatherForecast :summary="weather.daily.summary" :data="weather.daily.data" />
+            <WeatherForecast v-bind="weather.daily" />
           </div>
         </div>
         <div class="tile is-parent">
-          <WeatherDetails
-            :name="weather.location.name"
-            :latitude="weather.location.latitude"
-            :longitude="weather.location.longitude"
-            :pressure="weather.currently.pressure"
-            :cloudCover="weather.currently.cloudCover"
-            :humidity="weather.currently.humidity"
-            :windSpeed="weather.currently.windSpeed"
-          />
+          <WeatherDetails v-bind="{...weather.currently, ...weather.location}" />
         </div>
       </div>
+    </div>
+    <div class="notification is-primary" v-else>
+      <h3 class="title">Location Not found</h3>
+      <h4 class="subtitle">Location with such id is not yet added. Would you like to create one?</h4>
+      <router-link tag="a" class="button is-primary" to="/">Go to location add form</router-link>
     </div>
   </ViewBase>
 </template>

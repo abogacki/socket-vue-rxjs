@@ -1,10 +1,15 @@
 <template>
   <article class="tile is-child notification is-success">
     <div class="content">
-      <p class="heading">
-        current weather details for
-        <strong>{{name}}</strong>
-        <fa-icon icon="map-marker-alt" />
+      <p class="heading">current weather details for</p>
+      <p class="is-uppercase">
+        <span>
+          <strong>{{name}}</strong>
+        </span>
+
+        <span>
+          <fa-icon icon="map-marker-alt" />
+        </span>
       </p>
       <p class="subtitle has-text-weight-light">
         {{latitude}}
@@ -38,8 +43,8 @@
 <script>
 export default {
   props: {
-    latitude: Number,
-    longitude: Number,
+    latitude: [Number, String],
+    longitude: [Number, String],
     name: String,
     pressure: Number,
     cloudCover: Number,

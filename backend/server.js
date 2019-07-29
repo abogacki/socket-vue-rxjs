@@ -20,11 +20,15 @@ io.on('connect', socket => {
   const { latitude, longitude } = socket.handshake.query
   const url = getDarkSkyUrl(latitude, longitude, 'si')
 
-  // if (interval) {
-  // clearInterval(interval)
-  // }
+  if (interval) {
+    clearInterval(interval)
+  }
+
   console.log('Client connected')
-  // interval = setInterval(() => {}, 10000)
+
+  const INTERVAL = 1000 * 60 * 5
+
+  interval = setInterval(() => {}, INTERVAL)
 
   getApiAndEmit(socket, url)
 

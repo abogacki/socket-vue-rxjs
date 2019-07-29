@@ -3,59 +3,13 @@
     <div v-if="weather">
       <div class="tile is-ancestor">
         <div class="tile is-vertical is-8">
-          <div class="tile">
-            <div class="tile is-parent is-vertical">
-              <article class="tile is-child notification is-primary">
-                <p class="heading">Temperature for {{weather.location.name}}</p>
-                <div class="content has-text-centered">
-                  <figure class="image">
-                    <fa-icon size="4x" icon="temperature-high" />
-                  </figure>
-                  <strong class="is-size-3">
-                    {{weather.currently.temperature}}
-                    <small>°F</small>
-                  </strong>
-                </div>
-              </article>
-            </div>
-
-            <div class="tile is-parent">
-              <article class="tile is-child notification is-info">
-                <p class="heading">Today is...</p>
-                <figure class="image has-text-centered">
-                  <fa-icon size="6x" icon="sun" />
-                </figure>
-                <br />
-                <p class="has-text-centered has-text-weight-bold">{{weather.currently.summary}}</p>
-              </article>
-            </div>
-          </div>
-
+          <WeatherCurrent
+            :location="weather.location.name"
+            :temperature="weather.currently.temperature"
+            :summary="weather.currently.summary"
+          />
           <div v-if="weather.daily" class="tile is-parent">
-            <article class="tile is-child">
-              <p class="heading">Forecast for upcoming days</p>
-              <br />
-              <p>{{weather.daily.summary}}</p>
-              <br />
-              <div class="level">
-                <div
-                  class="level-item has-text-centered"
-                  v-for="day in weather.daily.data"
-                  :key="day.time"
-                >
-                  <div>
-                    <p class="heading">{{new Date(day.time * 1000).toLocaleDateString()}}</p>
-                    <br />
-                    <figure class="image">
-                      <fa-icon icon="sun" size="3x" />
-                    </figure>
-                    <br />
-                    <p class="has-text-blue">{{ day.temperatureLow }} °F</p>
-                    <p class="has-text-danger">{{ day.temperatureHigh }} °F</p>
-                  </div>
-                </div>
-              </div>
-            </article>
+            <WeatherForecast :summary="weather.daily.summary" :data="weather.daily.data" />
           </div>
         </div>
         <div class="tile is-parent">
@@ -96,6 +50,8 @@ import WeatherService from '@/services/connection.service.js'
 import ViewBase from './_Animation'
 import { Weather } from '@/models/'
 import ConnectionService from '@/services/connection.service'
+import WeatherForecast from '@/components/WeatherForecast'
+import WeatherCurrent from '@/components/WeatherCurrent'
 
 export default {
   name: 'Weather',
@@ -110,25 +66,34 @@ export default {
         .first()
     },
   },
-  created() {
-    const { latitude, longitude } = this.weather.location
-
-    this.service = new ConnectionService(latitude, longitude)
-
-    const mutator = ({ currently, daily }) => {
-      console.log(this.weather.$update)
-      console.log(daily)
-
-      Weather.update({ where: this.weather.id, data: { currently, daily } })
+  data() {
+    return {
+      units: {
+        temperature: '°C',
+      },
     }
+  },
+  created() {
+    if (this.weather) {
+      const { latitude, longitude } = this.weather.location
 
-    this.service.openConnection('FromAPI', mutator)
+      this.service = new ConnectionService(latitude, longitude)
+
+      const mutator = ({ currently, daily }) => {
+        Weather.update({ where: this.weather.id, data: { currently, daily } })
+      }
+      this.service.openConnection('FromAPI', mutator)
+    }
   },
   beforeDestroy() {
-    this.service.closeConnection('FromAPI')
+    if (this.service) {
+      this.service.closeConnection('FromAPI')
+    }
   },
   components: {
     ViewBase,
+    WeatherForecast,
+    WeatherCurrent,
   },
 }
 </script>

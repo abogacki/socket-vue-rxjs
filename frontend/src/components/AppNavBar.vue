@@ -1,9 +1,5 @@
 <template>
-  <nav
-    class="navbar is-fixed-top is-spaced is-shadowed"
-    role="navigation"
-    aria-label="main navigation"
-  >
+  <nav class="navbar is-spaced is-shadowed" role="navigation" aria-label="main navigation">
     <div class="container">
       <div class="navbar-brand">
         <a href="#/" class="navbar-item">
@@ -11,9 +7,46 @@
           <span class="heading">Weather</span>
           <span class="heading has-text-weight-light">app</span>
         </a>
+        <a
+          role="button"
+          class="navbar-burger burger has-text-white"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarBasicExample"
+          @click="toggleActive"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
       </div>
 
-      <div id="navbarBasicExample" class="navbar-menu" :class="{'is-active': isActive}"></div>
+      <div id="navbarBasicExample" class="navbar-menu" :class="{'is-active': isActive}">
+        <div class="navbar-end">
+          <b-dropdown disabled v-model="units">
+            <button class="button is-small is-rounded" slot="trigger">
+              <small>Units:</small>
+              <span class="has-text-weight-light has-text-weight-bold is-uppercase">{{units}}</span>
+            </button>
+            <b-dropdown-item value="si" aria-role="listitem">
+              <div class="media">
+                <div class="media-content">
+                  <h3>SI</h3>
+                  <small>International System of Units</small>
+                </div>
+              </div>
+            </b-dropdown-item>
+            <b-dropdown-item value="us" aria-role="listitem">
+              <div class="media">
+                <div class="media-content">
+                  <h3>US</h3>
+                  <small>United States Units</small>
+                </div>
+              </div>
+            </b-dropdown-item>
+          </b-dropdown>
+        </div>
+      </div>
     </div>
   </nav>
 </template>
@@ -24,6 +57,7 @@ export default {
   data() {
     return {
       isActive: false,
+      units: 'si',
     }
   },
   methods: {

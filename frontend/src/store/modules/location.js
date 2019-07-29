@@ -1,5 +1,3 @@
-import { Location } from '@/models'
-
 const locations = {
   state: {
     fetching: false,

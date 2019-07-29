@@ -39,8 +39,7 @@ export default {
   methods: {
     destroy(location, e) {
       e.preventDefault()
-      console.log(location, e)
-      location.$destroy()
+      location.$delete()
     },
   },
 }

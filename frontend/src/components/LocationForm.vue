@@ -53,9 +53,9 @@ export default {
   data() {
     return {
       form: {
-        name: 'Kilimandżaro',
-        latitude: 33.456,
-        longitude: 150.31,
+        name: 'Poznan',
+        latitude: 52.40637,
+        longitude: 16.92516,
       },
     }
   },

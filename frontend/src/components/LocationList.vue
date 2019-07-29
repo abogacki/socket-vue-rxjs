@@ -36,9 +36,6 @@ export default {
       return Location.all()
     },
   },
-  watch: {
-    locations(newLocations, oldLocations) {},
-  },
   methods: {
     destroy(location, e) {
       e.preventDefault()

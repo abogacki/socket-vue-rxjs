@@ -1,10 +1,20 @@
-const store = {
+import { Location } from '@/models'
+
+const locations = {
+  state: {
+    fetching: false,
+    error: [],
+  },
+  actions: {
+    fetch({ state, commit }) {
+      console.log(state, commit)
+    },
+  },
+  mutations: {
+    initialiseStore(state) {
+      console.log(state)
+    },
+  },
 }
 
-const getters = {
-  locationByPosition: state => ({latitude, longitude}) => state.locations.byPosition[]
-}
-const actions = {}
-const mutations = {}
-
-export default { getters, actions, mutations, store }
+export default locations

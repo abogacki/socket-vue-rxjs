@@ -53,7 +53,7 @@ export default {
   data() {
     return {
       form: {
-        name: 'Poznan',
+        name: 'Poznań',
         latitude: 52.40637,
         longitude: 16.92516,
       },

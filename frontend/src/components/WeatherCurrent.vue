@@ -3,14 +3,13 @@
     <div class="tile is-parent is-vertical">
       <article class="tile is-child notification is-primary">
         <p class="heading">
-          <span class="has-text-weight-light">Temperature for:</span>
-          <strong class="is-size-6">{{location}}</strong>
+          <span class="has-text-weight-light">Temperature:</span>
         </p>
         <div class="content has-text-centered">
           <figure class="image">
-            <fa-icon size="4x" icon="temperature-high" />
+            <fa-icon size="6x" icon="temperature-high" />
           </figure>
-          <strong class="is-size-3">
+          <strong class="is-size-5">
             {{temperature}}
             <small>{{units.temperature}}</small>
           </strong>
@@ -25,7 +24,9 @@
           <fa-icon size="6x" icon="sun" />
         </figure>
         <br />
-        <p class="has-text-centered has-text-weight-bold">{{summary}}</p>
+        <div class="content">
+          <strong class="has-text-centered">{{summary}}</strong>
+        </div>
       </article>
     </div>
   </div>

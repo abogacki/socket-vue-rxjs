@@ -1,10 +1,18 @@
 <template>
   <ViewBase>
+    <template #header>
+      <div class="subtitle heading">
+        <a @click="$router.back()">
+          <fa-icon icon="arrow-left" />&nbsp;
+          Location list
+        </a>
+      </div>
+    </template>
+
     <div v-if="weather">
       <div class="tile is-ancestor">
         <div class="tile is-vertical is-8">
           <WeatherCurrent
-            :location="weather.location.name"
             :temperature="weather.currently.temperature"
             :summary="weather.currently.summary"
           />
@@ -13,32 +21,15 @@
           </div>
         </div>
         <div class="tile is-parent">
-          <article class="tile is-child notification is-success">
-            <div class="content">
-              <p class="heading">current weather details for</p>
-              <p class="subtitle">{{weather.location.latitude}}, {{weather.location.longitude}}</p>
-              <div class="content">
-                <p>
-                  <span class="heading">pressure:</span>
-                  {{weather.currently.pressure}} hPa
-                </p>
-                <p>
-                  <span class="heading">cloud cover:</span>
-                  {{weather.currently.cloudCover * 100}} %
-                </p>
-
-                <p>
-                  <span class="heading">humidity:</span>
-                  {{weather.currently.humidity * 100}} %
-                </p>
-
-                <p>
-                  <span class="heading">wind speed:</span>
-                  {{weather.currently.windSpeed}}
-                </p>
-              </div>
-            </div>
-          </article>
+          <WeatherDetails
+            :name="weather.location.name"
+            :latitude="weather.location.latitude"
+            :longitude="weather.location.longitude"
+            :pressure="weather.currently.pressure"
+            :cloudCover="weather.currently.cloudCover"
+            :humidity="weather.currently.humidity"
+            :windSpeed="weather.currently.windSpeed"
+          />
         </div>
       </div>
     </div>
@@ -46,12 +37,12 @@
 </template>
 
 <script>
-import WeatherService from '@/services/connection.service.js'
 import ViewBase from './_Animation'
-import { Weather } from '@/models/'
 import ConnectionService from '@/services/connection.service'
-import WeatherForecast from '@/components/WeatherForecast'
+import { Weather } from '@/models/'
+import WeatherDetails from '@/components/WeatherDetails'
 import WeatherCurrent from '@/components/WeatherCurrent'
+import WeatherForecast from '@/components/WeatherForecast'
 
 export default {
   name: 'Weather',
@@ -92,8 +83,9 @@ export default {
   },
   components: {
     ViewBase,
-    WeatherForecast,
+    WeatherDetails,
     WeatherCurrent,
+    WeatherForecast,
   },
 }
 </script>

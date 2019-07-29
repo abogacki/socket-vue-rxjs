@@ -23,28 +23,30 @@
 
       <div id="navbarBasicExample" class="navbar-menu" :class="{'is-active': isActive}">
         <div class="navbar-end">
-          <b-dropdown disabled v-model="units">
-            <button class="button is-small is-rounded" slot="trigger">
-              <small>Units:</small>
-              <span class="has-text-weight-light has-text-weight-bold is-uppercase">{{units}}</span>
-            </button>
-            <b-dropdown-item value="si" aria-role="listitem">
-              <div class="media">
-                <div class="media-content">
-                  <h3>SI</h3>
-                  <small>International System of Units</small>
+          <div class="navbar-item">
+            <b-dropdown disabled v-model="units">
+              <button class="button is-small is-rounded" slot="trigger">
+                <small>Units:</small>
+                <span class="has-text-weight-light has-text-weight-bold is-uppercase">{{units}}</span>
+              </button>
+              <b-dropdown-item value="si" aria-role="listitem">
+                <div class="media">
+                  <div class="media-content">
+                    <h3>SI</h3>
+                    <small>International System of Units</small>
+                  </div>
                 </div>
-              </div>
-            </b-dropdown-item>
-            <b-dropdown-item value="us" aria-role="listitem">
-              <div class="media">
-                <div class="media-content">
-                  <h3>US</h3>
-                  <small>United States Units</small>
+              </b-dropdown-item>
+              <b-dropdown-item value="us" aria-role="listitem">
+                <div class="media">
+                  <div class="media-content">
+                    <h3>US</h3>
+                    <small>United States Units</small>
+                  </div>
                 </div>
-              </div>
-            </b-dropdown-item>
-          </b-dropdown>
+              </b-dropdown-item>
+            </b-dropdown>
+          </div>
         </div>
       </div>
     </div>

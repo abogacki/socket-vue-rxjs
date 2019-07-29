@@ -3,14 +3,9 @@
     <div class="content">
       <p class="heading">current weather details for</p>
       <p class="is-uppercase">
-        <span>
-          <strong>{{name}}</strong>
-        </span>
-
-        <span>
-          <fa-icon icon="map-marker-alt" />
-        </span>
+        <strong>{{name}}</strong>
       </p>
+      <p class="has-text-weight-light is-size-7">(last update {{lastUpdate}})</p>
       <p class="subtitle has-text-weight-light">
         {{latitude}}
         |
@@ -41,6 +36,8 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   props: {
     latitude: [Number, String],
@@ -50,6 +47,7 @@ export default {
     cloudCover: Number,
     humidity: Number,
     windSpeed: Number,
+    time: Number,
   },
   data() {
     return {
@@ -57,6 +55,11 @@ export default {
         pressure: 'hPa',
       },
     }
+  },
+  computed: {
+    lastUpdate() {
+      return moment(this.time * 1000).fromNow()
+    },
   },
 }
 </script>

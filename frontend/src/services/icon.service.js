@@ -6,7 +6,6 @@ const types = {
 }
 
 export const translateIcon = icon => {
-  console.log(icon)
   return types[icon] || 'compass'
 }
 

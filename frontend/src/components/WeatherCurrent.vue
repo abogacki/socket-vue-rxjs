@@ -20,12 +20,11 @@
     <div class="tile is-parent">
       <article class="tile is-child notification is-info">
         <p class="heading">Today is...</p>
-        <figure class="image has-text-centered">
-          <fa-icon size="6x" :icon="translatedIcon" />
-        </figure>
-        <br />
-        <div class="content">
-          <strong class="has-text-centered">{{summary}}</strong>
+        <div class="content has-text-centered">
+          <figure class="image">
+            <fa-icon size="6x" :icon="translatedIcon" />
+          </figure>
+          <strong class="is-size-5">{{summary}}</strong>
         </div>
       </article>
     </div>
@@ -34,6 +33,7 @@
 
 <script>
 import { translateIcon } from '@/services/icon.service'
+import moment from 'moment'
 
 export default {
   props: {
@@ -41,6 +41,7 @@ export default {
     temperature: Number,
     summary: String,
     icon: String,
+    time: Number,
   },
   computed: {
     translatedIcon() {

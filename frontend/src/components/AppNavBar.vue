@@ -9,7 +9,7 @@
         </a>
         <a
           role="button"
-          class="navbar-burger burger has-text-white"
+          class="navbar-burger burger"
           aria-label="menu"
           aria-expanded="false"
           data-target="navbarBasicExample"

@@ -1,7 +1,7 @@
 <template>
   <form class="form" @submit="onSubmit($event)">
     <b-field grouped>
-      <b-field expanded custom-class="has-text-white" label="City">
+      <b-field expanded custom-class label="City">
         <b-input
           size="is-small"
           v-model="form.name"
@@ -11,7 +11,7 @@
         />
       </b-field>
 
-      <b-field custom-class="has-text-white" label="Latitude">
+      <b-field custom-class label="Latitude">
         <b-input
           size="is-small"
           placeholder="46.33525"
@@ -23,7 +23,7 @@
         />
       </b-field>
 
-      <b-field custom-class="has-text-white" label="Longitude">
+      <b-field custom-class label="Longitude">
         <b-input
           size="is-small"
           placeholder="23.56735"
@@ -34,7 +34,7 @@
           max="180"
         />
       </b-field>
-      <b-field custom-class="has-text-white" label="Submit">
+      <b-field custom-class label="Submit">
         <button
           type="submit"
           class="button is-warning is-inverted is-outlined is-rounded is-small"

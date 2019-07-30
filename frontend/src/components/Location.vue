@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="box notification is-warning is-transparent has-text-white">
+    <div class="box notification is-warning is-transparent">
       <LocationForm />
     </div>
     <LocationList />

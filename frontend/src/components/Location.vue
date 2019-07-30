@@ -1,20 +1,18 @@
 <template>
-  <Animation>
-    <div class="box has-background-primary is-transparent has-text-white">
+  <div>
+    <div class="box notification is-warning is-transparent has-text-white">
       <LocationForm />
     </div>
     <LocationList />
-  </Animation>
+  </div>
 </template>
 
 <script>
-import Animation from './_Animation'
 import LocationForm from './LocationForm'
 import LocationList from './LocationList'
 
 export default {
   components: {
-    Animation,
     LocationForm,
     LocationList,
   },

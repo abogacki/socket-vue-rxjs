@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="hero is-primary is-bold is-fullheight">
+    <div :class="theme.color" class="hero is-bold is-fullheight">
       <div class="hero-head">
         <AppNavBar />
       </div>
@@ -26,8 +26,82 @@ export default {
     AppNavBar,
     AppFooter,
   },
+  computed: {
+    theme() {
+      return { color: 'is-warning' }
+    },
+  },
+  created() {
+    console.log(this.$store.state)
+  },
 }
 </script>
 
-<style>
+<style lang="scss">
+@import '~bulma/sass/utilities/_all';
+
+// Set your colors
+$primary: #4099ff;
+$primary-invert: findColorInvert($primary);
+$secondary: #f3e367;
+$secondary-invert: findColorInvert($primary);
+$twitter: #4099ff;
+$twitter-invert: findColorInvert($twitter);
+
+// Setup $colors to use as bulma classes (e.g. 'is-twitter')
+$colors: (
+  'white': (
+    $white,
+    $black,
+  ),
+  'black': (
+    $black,
+    $white,
+  ),
+  'light': (
+    $light,
+    $light-invert,
+  ),
+  'dark': (
+    $dark,
+    $dark-invert,
+  ),
+  'primary': (
+    $primary,
+    $primary-invert,
+  ),
+  'info': (
+    $info,
+    $info-invert,
+  ),
+  'success': (
+    $success,
+    $success-invert,
+  ),
+  'warning': (
+    $warning,
+    $warning-invert,
+  ),
+  'danger': (
+    $danger,
+    $danger-invert,
+  ),
+  'twitter': (
+    $twitter,
+    $twitter-invert,
+  ),
+  'secondary': (
+    $secondary,
+    $secondary-invert,
+  ),
+);
+
+// Links
+$link: $primary;
+$link-invert: $primary-invert;
+$link-focus-border: $primary;
+
+// Import Bulma and Buefy styles
+@import '~bulma';
+@import '~buefy/src/scss/buefy';
 </style>

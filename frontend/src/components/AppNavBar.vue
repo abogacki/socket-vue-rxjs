@@ -22,9 +22,10 @@
       </div>
 
       <div id="navbarBasicExample" class="navbar-menu" :class="{'is-active': isActive}">
+        <div class="navbar-start"></div>
         <div class="navbar-end">
           <div class="navbar-item">
-            <b-dropdown disabled v-model="units">
+            <b-dropdown v-model="units">
               <button class="button is-small is-rounded" slot="trigger">
                 <small>Units:</small>
                 <span class="has-text-weight-light has-text-weight-bold is-uppercase">{{units}}</span>

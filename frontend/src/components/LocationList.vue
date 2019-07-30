@@ -5,19 +5,22 @@
       v-for="location in locations"
       :key="location.id"
     >
-      <router-link :to="`/weather/${location.id}`" class="box has-background-primary">
+      <router-link :to="`/weather/${location.id}`" class="box notification is-warning">
         <a @click="destroy(location, $event)" class="delete"></a>
         <br />
+        <figure>
+          <fa-icon icon="map-marker-alt" size="6x" />
+        </figure>
         <br />
         <p class="title heading">{{ location.name }}</p>
         <hr />
         <div class="buttons">
-          <div class="button is-small is-fullwidth is-primary is-rounded is-rounded">
+          <div class="button is-small is-fullwidth is-warning is-rounded is-rounded">
             <span>latitude:</span>
             <small>{{ location.latitude }}</small>
           </div>
 
-          <div class="button is-small is-fullwidth is-primary is-rounded is-rounded">
+          <div class="button is-small is-fullwidth is-warning is-rounded is-rounded">
             <span>longitude:</span>
             <small>{{ location.longitude }}</small>
           </div>

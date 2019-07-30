@@ -1,13 +1,13 @@
 <template>
-  <article class="tile is-child">
+  <article class="tile is-child notification is-warning">
     <p class="heading">Forecast for upcoming days</p>
     <br />
     <p>{{summary}}</p>
     <br />
     <div class="level">
-      <div class="level-item has-text-centered" v-for="day in data" :key="day.time">
+      <div class="level-item has-text-centered" v-for="(day, i) in data" :key="day.time">
         <div>
-          <p class="heading">{{new Date(day.time * 1000).toLocaleDateString()}}</p>
+          <p class="heading">{{dayNames[i]}}</p>
           <br />
           <figure class="image">
             <fa-icon :icon="getIcon(day.icon)" size="3x" />
@@ -23,6 +23,8 @@
 
 <script>
 import { translateIcon } from '@/services/icon.service'
+import moment from 'moment'
+
 export default {
   data() {
     return {
@@ -34,6 +36,11 @@ export default {
   props: {
     data: Array,
     summary: String,
+  },
+  computed: {
+    dayNames() {
+      return this.data.map(({ time }) => moment(time * 1000).format('dddd'))
+    },
   },
   methods: {
     getIcon(icon) {

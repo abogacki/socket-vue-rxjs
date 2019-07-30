@@ -37,7 +37,7 @@
       <b-field custom-class="has-text-white" label="Submit">
         <button
           type="submit"
-          class="button is-primary is-inverted is-outlined is-rounded is-small"
+          class="button is-warning is-inverted is-outlined is-rounded is-small"
         >Add</button>
       </b-field>
     </b-field>

@@ -28,9 +28,9 @@ io.on('connect', socket => {
 
   const INTERVAL = 1000 * 60 * 5
 
-  interval = setInterval(() => {}, INTERVAL)
+  // interval = setInterval(() => {}, INTERVAL)
 
-  getApiAndEmit(socket, url)
+  // getApiAndEmit(socket, url)
 
   socket.on('disconnect', () => {
     console.log('Client disconenct')

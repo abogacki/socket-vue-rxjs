@@ -6,7 +6,7 @@ import router from './router'
 
 // buefy setup
 import Buefy from 'buefy'
-import 'buefy/dist/buefy.css'
+// import 'buefy/dist/buefy.css'
 
 // vue fontawesome setup
 import './iconsSetup'

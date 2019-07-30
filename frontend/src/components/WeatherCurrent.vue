@@ -1,7 +1,7 @@
 <template>
   <div class="tile">
     <div class="tile is-parent is-vertical">
-      <article class="tile is-child notification is-primary">
+      <article class="tile is-child notification is-warning">
         <p class="heading">
           <span class="has-text-weight-light">Temperature:</span>
         </p>
@@ -18,7 +18,7 @@
     </div>
 
     <div class="tile is-parent">
-      <article class="tile is-child notification is-info">
+      <article class="tile is-child notification is-warning">
         <p class="heading">Today is...</p>
         <div class="content has-text-centered">
           <figure class="image">

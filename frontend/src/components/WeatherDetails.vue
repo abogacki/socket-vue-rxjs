@@ -28,7 +28,7 @@
 
         <p>
           <span class="heading">wind speed:</span>
-          {{windSpeed}}
+          {{windSpeed}} {{units.speed}}
         </p>
       </div>
     </div>
@@ -53,6 +53,7 @@ export default {
     return {
       units: {
         pressure: 'hPa',
+        speed: 'km/h',
       },
     }
   },

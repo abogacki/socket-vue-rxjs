@@ -6,11 +6,7 @@
         <strong>{{name}}</strong>
       </p>
       <p class="has-text-weight-light is-size-7">(last update {{lastUpdate}})</p>
-      <p class="subtitle has-text-weight-light">
-        {{latitude}}
-        |
-        {{longitude}}
-      </p>
+      <p class="has-text-weight-light">{{latitude}}, {{longitude}}</p>
       <div class="content">
         <p>
           <span class="heading">pressure:</span>

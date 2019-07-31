@@ -1,21 +1,13 @@
 <template>
   <form class="form" @submit="onSubmit($event)">
-    <b-field>
-      <LocationInput />
-    </b-field>
     <b-field grouped>
       <b-field expanded custom-class label="City">
-        <b-input
-          size="is-small"
-          v-model="form.name"
-          placeholder="City name, eg. Poznan, Warszawa"
-          type="text"
-          aria-required="true"
-        />
+        <LocationInput @select="onSelect($event)" :value="form.name" />
       </b-field>
 
       <b-field custom-class label="Latitude">
         <b-input
+          readonly
           size="is-small"
           placeholder="46.33525"
           min="-90"
@@ -28,6 +20,7 @@
 
       <b-field custom-class label="Longitude">
         <b-input
+          readonly
           size="is-small"
           placeholder="23.56735"
           v-model="form.longitude"
@@ -55,9 +48,9 @@ export default {
   data() {
     return {
       form: {
-        name: 'Poznań',
-        latitude: 52.40637,
-        longitude: 16.92516,
+        name: '',
+        latitude: null,
+        longitude: null,
       },
     }
   },
@@ -71,12 +64,23 @@ export default {
         data: { latitude, longitude, name },
       })
       const location = res.locations[0]
+      console.log(location)
 
-      Weather.insert({
+      const weather = await Weather.insert({
         data: { location_id: location.id },
       })
 
-      this.form = { name: '', longitude: '', latitude: '' }
+      this.fillForm()
+    },
+    onSelect(option) {
+      const latitude = Math.round(option.geometry.lat * 100000) / 100000
+      const longitude = Math.round(option.geometry.lng * 100000) / 100000
+      const name = option.formatted
+      this.fillForm({ name, latitude, longitude })
+    },
+
+    fillForm({ latitude = '', longitude = '', name = '' } = {}) {
+      this.form = { latitude, longitude, name }
     },
   },
   components: {

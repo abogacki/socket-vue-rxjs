@@ -19,7 +19,6 @@ class ConnectionService {
   }
 
   emitEvent(eventType, payload) {
-    console.log(eventType, payload)
     this.socket.emit(eventType, payload)
   }
 }

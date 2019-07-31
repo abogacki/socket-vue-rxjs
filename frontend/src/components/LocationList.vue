@@ -40,9 +40,11 @@ export default {
     },
   },
   methods: {
-    destroy(location, e) {
+    async destroy(location, e) {
       e.preventDefault()
-      location.$delete()
+      console.log(Location.delete(location.id))
+
+      await location.$delete()
     },
   },
 }

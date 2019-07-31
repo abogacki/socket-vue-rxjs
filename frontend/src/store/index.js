@@ -9,5 +9,5 @@ const OrmPlugin = VuexORM.install(database)
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  plugins: [OrmPlugin, VuexLocalStorage],
+  plugins: [OrmPlugin],
 })

@@ -19,7 +19,9 @@
               </div>
             </div>
             <div class="tile is-parent">
-              <WeatherDetails v-bind="{...weather.currently, ...weather.location}" />
+              <WeatherDetails
+                v-bind="{...weather.currently, name: weather.location.name, latitude: weather.location.latitude, longitude: weather.location.longitude, }"
+              />
             </div>
           </div>
         </transition>
@@ -66,6 +68,8 @@ export default {
   },
   created() {
     if (this.weather) {
+      console.log(Object.keys(this.weather.location))
+
       const { latitude, longitude } = this.weather.location
 
       this.service = new ConnectionService()

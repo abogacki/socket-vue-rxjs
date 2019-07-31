@@ -1,5 +1,4 @@
 import { Model } from '@vuex-orm/core'
-import { Weather } from '@/models'
 
 export class Location extends Model {
   static entity = 'locations'

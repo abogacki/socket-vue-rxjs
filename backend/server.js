@@ -26,11 +26,12 @@ io.on('connect', socket => {
 
   console.log('Client connected')
 
+  // initial request to get weather data immidiately
+  getApiAndEmit(socket, url)
+
+  // interval to get data every 5 minutes
   const INTERVAL = 1000 * 60 * 5
-
-  // interval = setInterval(() => {}, INTERVAL)
-
-  // getApiAndEmit(socket, url)
+  interval = setInterval(() => {}, INTERVAL)
 
   socket.on('disconnect', () => {
     console.log('Client disconenct')

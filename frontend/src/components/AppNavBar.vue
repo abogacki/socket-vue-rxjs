@@ -13,6 +13,7 @@
           aria-label="menu"
           aria-expanded="false"
           data-target="navbarBasicExample"
+          :class="{'is-active':isActive}"
           @click="toggleActive"
         >
           <span aria-hidden="true"></span>

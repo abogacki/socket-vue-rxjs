@@ -68,18 +68,21 @@ export default {
     if (this.weather) {
       const { latitude, longitude } = this.weather.location
 
-      this.service = new ConnectionService(latitude, longitude)
+      this.service = new ConnectionService()
+      this.service.emitEvent('GetWeather', { latitude, longitude })
 
       const mutator = ({ currently, daily }) => {
+        console.log(currently, daily)
+
         Weather.update({ where: this.weather.id, data: { currently, daily } })
       }
 
-      this.service.openConnection('FromAPI', mutator)
+      this.service.openConnection('WeatherFromAPI', mutator)
     }
   },
   beforeDestroy() {
     if (this.service) {
-      this.service.closeConnection('FromAPI')
+      this.service.closeConnection('WeatherFromAPI')
     }
   },
   methods: {

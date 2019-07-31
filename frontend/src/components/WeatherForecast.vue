@@ -4,8 +4,8 @@
     <br />
     <p>{{summary}}</p>
     <br />
-    <div class="level">
-      <div class="level-item has-text-centered" v-for="(day, i) in data" :key="day.time">
+    <div class="columns is-multiline">
+      <div class="column is-3-touch has-text-centered" v-for="(day, i) in data" :key="day.time">
         <div>
           <p class="heading">{{dayNames[i]}}</p>
           <br />

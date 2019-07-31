@@ -1,8 +1,9 @@
-const express = require('express')
+import express from 'express'
+
 const router = express.Router()
 
-router.get('/', (req, res) => {
-  res.send({ response: 'I am alive' }).status(200)
-})
-
-module.exports = router
+module.exports = function(app, io) {
+  app.get('/', function(req, res) {
+    res.send('working')
+  })
+}

@@ -17,28 +17,31 @@ const io = socketIo(server)
 let interval
 
 io.on('connect', socket => {
-  const { latitude, longitude } = socket.handshake.query
-  const url = getDarkSkyUrl(latitude, longitude, 'si')
-
-  if (interval) {
-    clearInterval(interval)
-  }
-
   console.log('Client connected')
 
-  // initial request to get weather data immidiately
-  getApiAndEmit(socket, url)
+  socket.on('GetWeather', ({ latitude, longitude }) => {
+    if (interval) {
+      clearInterval(interval)
+    }
 
-  // interval to get data every 5 minutes
-  const INTERVAL = 1000 * 60 * 5
-  interval = setInterval(() => {}, INTERVAL)
+    const url = getDarkSkyUrl({ latitude, longitude }, 'si')
+
+    // initial request to get weather data immidiately
+    getApiAndEmit(socket, url)
+
+    // interval to get data every 5 minutes
+    const INTERVAL = 1000 * 60 * 5
+    interval = setInterval(() => {
+      getApiAndEmit(socket, url)
+    }, INTERVAL)
+  })
 
   socket.on('disconnect', () => {
     console.log('Client disconenct')
   })
 })
 
-const getDarkSkyUrl = (latitude, longitude, units) => {
+const getDarkSkyUrl = ({ latitude, longitude }, units) => {
   const baseUrl = 'https://api.darksky.net/forecast'
   const url = `${baseUrl}/${
     process.env.DARK_SKY_KEY
@@ -49,8 +52,9 @@ const getDarkSkyUrl = (latitude, longitude, units) => {
 const getApiAndEmit = async (socket, url) => {
   try {
     const res = await axios.get(url)
-    socket.emit('FromAPI', res.data)
+    io.emit('WeatherFromAPI', res.data)
   } catch (error) {
+    console.log(error)
     socket.emit(`Error`, error)
   }
 }

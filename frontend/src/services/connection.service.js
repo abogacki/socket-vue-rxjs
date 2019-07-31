@@ -2,19 +2,25 @@ import socketIOClient from 'socket.io-client'
 
 class ConnectionService {
   endpoint = 'http://192.168.208.25:4001'
-  constructor(latitude, longitude) {
-    this.socket = socketIOClient(this.endpoint, {
-      query: `latitude=${latitude}&longitude=${longitude}`,
-    })
+  connections = {}
+
+  constructor() {
+    this.socket = socketIOClient(this.endpoint)
   }
 
-  openConnection(event, fn) {
-    this.socket.on(event, fn)
+  openConnection(eventType, callback) {
+    this.socket.on(eventType, callback)
+    this.connections[eventType] = callback
   }
 
-  closeConnection(event) {
-    this.socket.off(event)
+  closeConnection(eventType) {
+    this.socket.off(eventType)
     this.socket.close()
+  }
+
+  emitEvent(eventType, payload) {
+    console.log(eventType, payload)
+    this.socket.emit(eventType, payload)
   }
 }
 

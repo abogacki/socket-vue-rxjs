@@ -1,5 +1,8 @@
 <template>
   <form class="form" @submit="onSubmit($event)">
+    <b-field>
+      <LocationInput />
+    </b-field>
     <b-field grouped>
       <b-field expanded custom-class label="City">
         <b-input
@@ -46,6 +49,7 @@
 
 <script>
 import { Location, Weather } from '@/models'
+import LocationInput from '@/components/LocationInput'
 
 export default {
   data() {
@@ -74,6 +78,9 @@ export default {
 
       this.form = { name: '', longitude: '', latitude: '' }
     },
+  },
+  components: {
+    LocationInput,
   },
 }
 </script>

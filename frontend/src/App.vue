@@ -31,9 +31,6 @@ export default {
       return { color: 'is-warning' }
     },
   },
-  created() {
-    console.log(this.$store.state)
-  },
 }
 </script>
 

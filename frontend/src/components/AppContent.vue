@@ -7,16 +7,9 @@
 </template>
 
 <script>
-import anime from 'animejs/lib/anime.es'
-import uuid from 'uuid/v1'
 import AppContentAnimation from './AppContentAnimation'
 
 export default {
-  data() {
-    return {
-      customId: '',
-    }
-  },
   components: {
     AppContentAnimation,
   },

@@ -91,7 +91,7 @@ export default {
         opacity: [0, 1],
         translateX: [100, 0],
         easing: 'easeInCubic',
-        complete: anim => done(),
+        complete: () => done(),
       })
     },
     tilesEnter(el, done) {
@@ -101,7 +101,7 @@ export default {
         duration: 150,
         opacity: [0, 1],
         easing: 'easeInCubic',
-        complete: anim => done(),
+        complete: () => done(),
       })
     },
   },

@@ -46,8 +46,6 @@
 
 <script>
 import { Location, Weather } from '@/models'
-import data from '@/mocks/apiResponse.json'
-import uuid from 'uuid/v1'
 
 export default {
   data() {
@@ -70,7 +68,7 @@ export default {
       })
       const location = res.locations[0]
 
-      const weather = await Weather.insert({
+      Weather.insert({
         data: { location_id: location.id },
       })
 

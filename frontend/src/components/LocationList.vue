@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { Location, Weather } from '@/models'
+import { Location } from '@/models'
 
 export default {
   computed: {

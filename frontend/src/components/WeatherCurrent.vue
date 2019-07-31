@@ -33,7 +33,6 @@
 
 <script>
 import { translateIcon } from '@/services/icon.service'
-import moment from 'moment'
 
 export default {
   props: {

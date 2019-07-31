@@ -15,7 +15,7 @@ export default {
         opacity: [0, 1],
         duration: 150,
         easing: 'cubicBezier(.5, .05, .1, .3)',
-        complete: anim => {
+        complete: () => {
           done()
         },
       })
@@ -26,7 +26,7 @@ export default {
         opacity: [0, 1],
         duration: 150,
         easing: 'easeInCubic',
-        complete: anim => {
+        complete: () => {
           done()
         },
       })
